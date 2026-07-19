@@ -29,3 +29,8 @@ I am embarking on a journey to build one AI agent a day.
 
 - Nvidia 4090 
 
+## Frontier Models
+
+- Deepseek v4 Pro
+- Xiaomi MiMo v2.5 Pro
+- Gemini 3.5 Flash 
