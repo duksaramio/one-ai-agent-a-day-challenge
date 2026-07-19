@@ -1,46 +1,53 @@
 # one-ai-agent-a-day-challenge
 
-I am embarking on a journey to build one AI agent a day. 
+I am embarking on a journey to build one AI agent a day.
 
-## Constraints 
+## Constraints
 
-- Local LLM 
-- Observability is a must 
-- Do One Thing and One thing well 
+- Local LLM
+- Observability is a must
+- Do One Thing and One thing well
 
-## Tools
+## Stack & Tools
 
-- Ollama 
-- Google Antigravity
-- Microsoft Code 
-- JetBrains Pycharm
-- Langfuse
-- Docker 
-- Ubuntu 24.04 LTS 
-- Ghostty 
-- Chrome browser 
-- Hermes Agent 
-- Pydantic AI 
+- **Framework**: Pydantic AI
+- **LLM**: Ollama (`qwen3.6:27b` run locally)
+- **Observability**: Langfuse (run locally on port 3000)
+- **Environment**: Ubuntu 24.04 LTS, Nvidia RTX 4090, Docker
 
-## LLM
+## Completed Agents
 
-- qwen3.6:27b
+### Day 1: Obsidian Reader Agent (`obsidian_reader/`)
+An AI agent capable of exploring, reading, and searching files inside the Obsidian vault (`/home/d3lee/obsidian`) with path traversal safety and local Langfuse tracing.
 
-## Hardware 
+#### Setup & Usage:
+1. Initialize the environment:
+   ```bash
+   python3 -m venv .venv
+   source .venv/bin/activate
+   pip install -r requirements.txt
+   ```
+2. Copy credentials template and set keys:
+   ```bash
+   cp .env.example .env
+   ```
+3. Run the CLI tool:
+   - **Interactive Chat Loop**:
+     ```bash
+     .venv/bin/python3 -m obsidian_reader.cli
+     ```
+   - **Single-Query Mode**:
+     ```bash
+     .venv/bin/python3 -m obsidian_reader.cli "Search my notes for saram"
+     ```
 
-- Nvidia 4090 
+---
 
-## Frontier Models
+## AI Agents to Build (Upcoming)
 
-- Deepseek v4 Pro
-- Xiaomi MiMo v2.5 Pro
-- Gemini 3.5 Flash 
-
-## AI Agents to Build
-
-- bsky social network poster for saram.io 
+- bsky social network poster for saram.io
 - doomscrolling poster for doomscroll.saram.io
 - end of day report agent
 - personal blogger
-- email assistant 
+- email assistant
 - file directory organizer

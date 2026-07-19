@@ -1,0 +1,1 @@
+# Obsidian Reader Agent package
