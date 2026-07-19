@@ -20,6 +20,7 @@ I am embarking on a journey to build one AI agent a day.
 - Ghostty 
 - Chrome browser 
 - Hermes Agent 
+- Pydantic AI 
 
 ## LLM
 
