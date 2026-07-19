@@ -35,3 +35,12 @@ I am embarking on a journey to build one AI agent a day.
 - Deepseek v4 Pro
 - Xiaomi MiMo v2.5 Pro
 - Gemini 3.5 Flash 
+
+## AI Agents to Build
+
+- bsky social network poster for saram.io 
+- doomscrolling poster for doomscroll.saram.io
+- end of day report agent
+- personal blogger
+- email assistant 
+- file directory organizer
