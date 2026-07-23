@@ -72,14 +72,3 @@ An AI agent built with Pydantic AI that reads blog posts from URLs, local file p
      cat blog.txt | .venv/bin/python3 -m blog_summarizer.cli
      ```
 
----
-
-## AI Agents to Build (Upcoming)
-
-- bsky social network poster for saram.io
-- doomscrolling poster for doomscroll.saram.io
-- end of day report agent
-- personal blogger
-- email assistant
-- file directory organizer
-
