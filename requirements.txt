@@ -2,3 +2,4 @@ pydantic-ai
 langfuse
 langfuse-pydantic-ai
 python-dotenv
+beautifulsoup4

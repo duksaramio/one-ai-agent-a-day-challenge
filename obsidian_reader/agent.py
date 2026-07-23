@@ -120,27 +120,42 @@ def get_safe_path(relative_path: str) -> Path:
         raise ValueError(f"Access denied: path traversal attempt detected for path '{relative_path}'")
     return joined_path
 
-# Initialize Ollama Model
-ollama_url = os.environ['OLLAMA_BASE_URL']
-if not ollama_url.endswith('/v1') and not ollama_url.endswith('/v1/'):
-    ollama_url = f"{ollama_url.rstrip('/')}/v1"
+from pydantic_ai.models.openai import OpenAIChatModel
+from pydantic_ai.providers.openai import OpenAIProvider
 
-model = OllamaModel(
-    model_name="qwen3.6:27b",
-    provider=OllamaProvider(base_url=ollama_url)
+# Initialize Unsloth OpenAI-compatible Model
+unsloth_base_url = os.environ.get("UNSLOTH_BASE_URL", "http://127.0.0.1:8888/v1")
+unsloth_api_key = os.environ.get("UNSLOTH_API_KEY", "sk-unsloth-YOUR_KEY")
+llm_model_name = os.environ.get("LLM_MODEL", "unsloth/Qwen3.6-27B-MTP-GGUF:UD-Q4_K_XL")
+
+model = OpenAIChatModel(
+    model_name=llm_model_name,
+    provider=OpenAIProvider(
+        base_url=unsloth_base_url,
+        api_key=unsloth_api_key,
+    )
 )
+
 
 # Define the Pydantic AI agent
 agent = Agent(
     model=model,
     name="obsidian_reader_agent",
+    model_settings={
+        'extra_body': {
+            'enable_tools': True,
+            'enabled_tools': ['web_search', 'python', 'terminal']
+        }
+    },
     system_prompt=(
         "You are an assistant with access to the user's Obsidian vault. "
         "Your task is to help the user search, read, and explore files and folders in their vault. "
+        "Do not output internal reasoning or <think> tags. "
         "Use the tools provided to discover files, read their content, and search for specific terms. "
         "Always be concise and provide helpful summaries of notes when requested."
     )
 )
+
 
 @agent.tool_plain
 def list_obsidian_files(relative_path: str = "") -> str:

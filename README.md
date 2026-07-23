@@ -11,9 +11,10 @@ I am embarking on a journey to build one AI agent a day.
 ## Stack & Tools
 
 - **Framework**: Pydantic AI
-- **LLM**: Ollama (`qwen3.6:27b` run locally)
+- **LLM**: Unsloth local server (`unsloth/Qwen3.6-27B-MTP-GGUF:UD-Q4_K_XL` at `http://127.0.0.1:8888/v1`)
 - **Observability**: Langfuse (run locally on port 3000)
 - **Environment**: Ubuntu 24.04 LTS, Nvidia RTX 4090, Docker
+
 
 ## Completed Agents
 
@@ -41,6 +42,36 @@ An AI agent capable of exploring, reading, and searching files inside the Obsidi
      .venv/bin/python3 -m obsidian_reader.cli "Search my notes for saram"
      ```
 
+### Day 2: Blog Post Summarizer Agent (`blog_summarizer/`)
+An AI agent built with Pydantic AI that reads blog posts from URLs, local file paths, designated folders, or direct copy-pasted text, and generates a structured summary (title, author, date, overview, key points, and key takeaways). Traced locally using Langfuse.
+
+#### Setup & Usage:
+1. Configure designated blog post directory in `.env`:
+   ```env
+   BLOGS_DIR="blogs_folder"
+   ```
+2. Run the CLI tool:
+   - **Interactive Menu / Paste Mode**:
+     ```bash
+     .venv/bin/python3 -m blog_summarizer.cli
+     ```
+   - **Summarize a File (Resolves relative to `BLOGS_DIR` or exact path)**:
+     ```bash
+     .venv/bin/python3 -m blog_summarizer.cli designing_ai_agents.md
+     ```
+   - **Summarize a URL**:
+     ```bash
+     .venv/bin/python3 -m blog_summarizer.cli "https://example.com/blog-post"
+     ```
+   - **Summarize Raw Text via Argument**:
+     ```bash
+     .venv/bin/python3 -m blog_summarizer.cli -t "Paste your blog content here..."
+     ```
+   - **Piped Input**:
+     ```bash
+     cat blog.txt | .venv/bin/python3 -m blog_summarizer.cli
+     ```
+
 ---
 
 ## AI Agents to Build (Upcoming)
@@ -51,3 +82,4 @@ An AI agent capable of exploring, reading, and searching files inside the Obsidi
 - personal blogger
 - email assistant
 - file directory organizer
+
