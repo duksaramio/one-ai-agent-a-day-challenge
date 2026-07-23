@@ -95,4 +95,51 @@ An AI agent built with Pydantic AI that reads a blog post from a web URL, summar
      .venv/bin/python3 -m bluesky_summarizer.cli "https://example.com/blog-post" --handle user.bsky.social --app-password xxxx-xxxx-xxxx-xxxx
      ```
 
+## Docker Usage
+
+All agents can be built and executed in Docker containers, configured to connect back to your host machine's Unsloth local LLM (`http://127.0.0.1:8888/v1`) and Langfuse (`http://localhost:3000`).
+
+### Building Docker Images
+
+```bash
+docker compose build
+```
+
+### Running Agents with Docker Compose
+
+- **Blog Summarizer (Interactive Menu)**:
+  ```bash
+  docker compose run --rm blog-summarizer
+  ```
+- **Blog Summarizer (Single File or URL)**:
+  ```bash
+  docker compose run --rm blog-summarizer blog_summarizer.cli "https://example.com/blog-post"
+  ```
+
+- **Bluesky Summarizer (Dry Run)**:
+  ```bash
+  docker compose run --rm bluesky-summarizer bluesky_summarizer.cli "https://example.com/blog-post" --dry-run
+  ```
+
+- **Obsidian Reader (Interactive Chat)**:
+  ```bash
+  docker compose run --rm obsidian-reader
+  ```
+
+### Running with Docker CLI Directly
+
+```bash
+docker build -t pydantic-ai-agents .
+
+# Run Blog Summarizer
+docker run -it --rm \
+  --add-host=host.docker.internal:host-gateway \
+  --env-file .env \
+  -e UNSLOTH_BASE_URL=http://host.docker.internal:8888/v1 \
+  -e LANGFUSE_HOST=http://host.docker.internal:3000 \
+  -v $(pwd)/blogs_folder:/app/blogs_folder \
+  pydantic-ai-agents blog_summarizer.cli
+```
+
+
 

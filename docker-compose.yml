@@ -1,0 +1,55 @@
+services:
+  blog-summarizer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: blog-summarizer-agent
+    env_file:
+      - .env
+    environment:
+      - UNSLOTH_BASE_URL=${UNSLOTH_BASE_URL_DOCKER:-http://host.docker.internal:8888/v1}
+      - LANGFUSE_HOST=${LANGFUSE_HOST_DOCKER:-http://host.docker.internal:3000}
+      - LANGFUSE_BASE_URL=${LANGFUSE_BASE_URL_DOCKER:-http://host.docker.internal:3000}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - ./blogs_folder:/app/blogs_folder
+    stdin_open: true
+    tty: true
+    command: ["blog_summarizer.cli"]
+
+  bluesky-summarizer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: bluesky-summarizer-agent
+    env_file:
+      - .env
+    environment:
+      - UNSLOTH_BASE_URL=${UNSLOTH_BASE_URL_DOCKER:-http://host.docker.internal:8888/v1}
+      - LANGFUSE_HOST=${LANGFUSE_HOST_DOCKER:-http://host.docker.internal:3000}
+      - LANGFUSE_BASE_URL=${LANGFUSE_BASE_URL_DOCKER:-http://host.docker.internal:3000}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    stdin_open: true
+    tty: true
+    command: ["bluesky_summarizer.cli"]
+
+  obsidian-reader:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: obsidian-reader-agent
+    env_file:
+      - .env
+    environment:
+      - UNSLOTH_BASE_URL=${UNSLOTH_BASE_URL_DOCKER:-http://host.docker.internal:8888/v1}
+      - LANGFUSE_HOST=${LANGFUSE_HOST_DOCKER:-http://host.docker.internal:3000}
+      - LANGFUSE_BASE_URL=${LANGFUSE_BASE_URL_DOCKER:-http://host.docker.internal:3000}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - ${OBSIDIAN_VAULT_PATH:-/home/d3lee/obsidian}:/home/d3lee/obsidian
+    stdin_open: true
+    tty: true
+    command: ["obsidian_reader.cli"]

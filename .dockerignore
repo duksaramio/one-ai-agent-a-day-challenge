@@ -1,0 +1,12 @@
+.git
+.gitignore
+.venv
+.agents
+.claude
+.env
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache
+*.log
