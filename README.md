@@ -72,3 +72,27 @@ An AI agent built with Pydantic AI that reads blog posts from URLs, local file p
      cat blog.txt | .venv/bin/python3 -m blog_summarizer.cli
      ```
 
+### Day 3: Blog Summarizer to Bluesky Agent (`bluesky_summarizer/`)
+An AI agent built with Pydantic AI that reads a blog post from a web URL, summarizes it strictly under 200 characters, and posts the summary along with the original blog URL to a Bluesky account using the AT Protocol API. Traced locally using Langfuse.
+
+#### Setup & Usage:
+1. Configure Bluesky credentials in `.env`:
+   ```env
+   BSKY_HANDLE="your-handle.bsky.social"
+   BSKY_APP_PASSWORD="your-app-password"
+   ```
+2. Run the CLI tool:
+   - **Dry-Run Mode (Preview summary & Bluesky post layout without posting live)**:
+     ```bash
+     .venv/bin/python3 -m bluesky_summarizer.cli "https://example.com/blog-post" --dry-run
+     ```
+   - **Live Post to Bluesky**:
+     ```bash
+     .venv/bin/python3 -m bluesky_summarizer.cli "https://example.com/blog-post"
+     ```
+   - **Override Credentials via Flags**:
+     ```bash
+     .venv/bin/python3 -m bluesky_summarizer.cli "https://example.com/blog-post" --handle user.bsky.social --app-password xxxx-xxxx-xxxx-xxxx
+     ```
+
+

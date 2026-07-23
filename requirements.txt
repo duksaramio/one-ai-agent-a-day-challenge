@@ -3,3 +3,5 @@ langfuse
 langfuse-pydantic-ai
 python-dotenv
 beautifulsoup4
+atproto
+
